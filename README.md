@@ -20,11 +20,11 @@ XSL and XSLT files used to generate data dictionary pages and data dictionary in
 A geodatabase table named MetadataExtract
 
 ## Table fields
-*DATASOURCE - Path to data (ex. - Database Connections\geoDB.sde\GeoDB.DBO.AOD)
-*FILENAME - Name of html file to create (ex. - AOD.html)
-*CATEGORY - Category to list data item under (ex. - Zoning)
-*SUBCATEGORY - Subcategory to list data item under (Optional)
-*ITEMNAME - Name in TOC of Data Dictionary (ex. - Arts Overlay District)
-*AGOL_USERID - Owner of AGOL item
-*AGOL_FOLDERID - AGOL item's  folder id
-*AGOL_ITEMID - AGOL item id
+* DATASOURCE - Path to data (ex. - Database Connections\geoDB.sde\GeoDB.DBO.AOD)
+* FILENAME - Name of html file to create (ex. - AOD.html)
+* CATEGORY - Category to list data item under (ex. - Zoning)
+* SUBCATEGORY - Subcategory to list data item under (Optional)
+* ITEMNAME - Name in TOC of Data Dictionary (ex. - Arts Overlay District)
+* AGOL_USERID - Owner of AGOL item
+* AGOL_FOLDERID - AGOL item's  folder id
+* AGOL_ITEMID - AGOL item id
