@@ -14,8 +14,9 @@ import libxml2, libxslt
 
 # Get input parameters
 ArcGIS_ItemDescription_xsl =  arcpy.GetParameterAsText(0)
-inputworkspace =  arcpy.GetParameterAsText(1)
-outworkspace = arcpy.GetParameterAsText(2)
+IndexPage_xsl = arcpy.GetParameterAsText(1)
+inputworkspace =  arcpy.GetParameterAsText(2)
+outworkspace = arcpy.GetParameterAsText(3)
 env.workspace = outworkspace
 
 
@@ -65,10 +66,10 @@ except:
      
 #Create index page
 try:
-    parseStyle = libxslt.parseStylesheetFile('C:\development\Metadata\DedhamMAIndex.xsl')
-    parsexml =  libxml2.parseFile('C:\development\Metadata\Output\extracttable.xml')
+    parseStyle = libxslt.parseStylesheetFile(IndexPage_xsl)
+    parsexml =  libxml2.parseFile(outworkspace + '\extracttable.xml')
     result = parseStyle.applyStylesheet(parsexml, None)
-    parseStyle.saveResultToFilename('C:\development\Metadata\Output\Index.html', result, 0)
+    parseStyle.saveResultToFilename(outworkspace + '\Index.html', result, 0)
 
     parseStyle.freeStyleDocuments()
     parsexml.freeDoc()
