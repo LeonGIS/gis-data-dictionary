@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # ---------------------------------------------------------------------------
-# UpdatreAgolItems.py
+# UpdateAgolItems.py
 # Created on: 3/3/2015
 #   
 # Description: 
@@ -25,16 +25,7 @@ from HTMLParser import HTMLParser
 
 # Defines the entry point into the script
 def main(argv=None):   
-    # Set up logging
-    LOG_FILENAME = 'C:\development\Metadata\Output\Metadata_UpdateAGOL.log'
-    logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s %(levelname)-8s %(message)s',
-                    datefmt='%a, %d %b %Y %H:%M:%S',
-                    filename=LOG_FILENAME,
-                    filemode='a')
-
-    logging.info("")
-    logging.info("**************************")
+    
     # Get input parameters
     ExtractTable =  arcpy.GetParameterAsText(0)
     inputrepository =  arcpy.GetParameterAsText(1)
@@ -43,14 +34,19 @@ def main(argv=None):
     AGOLpassword = arcpy.GetParameterAsText(4)
     datadictionary = arcpy.GetParameterAsText(5)
     
+    # Set up logging
+    LOG_FILENAME = inputrepository + '/Metadata_UpdateAGOL.log'
+    logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s %(levelname)-8s %(message)s',
+                    datefmt='%a, %d %b %Y %H:%M:%S',
+                    filename=LOG_FILENAME,
+                    filemode='a')
 
-    #ExtractTable = "C:\development\Metadata\Python\metadatascript.gdb\MetadataExtract"
-    #inputrepository = "C:\development\Metadata\Output"
-    #datadictionary = "http://gis.dedham-ma.gov/datadictionary/"
-    #portalURL = ""
-    #AGOLusername = ""
-    #AGOLpassword = ""
-    #TokenExpiration = 15
+    logging.info("")
+    logging.info("**************************")
+
+  
+    TokenExpiration = 15
 
 
      # Get a token
@@ -62,9 +58,9 @@ def main(argv=None):
     # Search each metadata page
     fields = ['FILENAME', 'AGOL_USERID','AGOL_FOLDERID', 'AGOL_ITEMID']
 
-    try:
-        with arcpy.da.SearchCursor(ExtractTable, fields) as cursor:
-            for row in cursor:
+    with arcpy.da.SearchCursor(ExtractTable, fields) as cursor:
+        for row in cursor:
+            try:
                 if not (row[0] is None) and not (row[1] is None) and not (row[2] is None) and not (row[3] is None):
                     strSummary = ''
                     strDesc = ''
@@ -73,10 +69,10 @@ def main(argv=None):
                     strCredits = ''
                     parser = MyParser()
                     parser.feed(open(inputrepository + '\\' + row[0]).read())
-                    strDesc = parser.Desc
+                    strDesc =  parser.Desc
 
-                    strDesc = strDesc + "<div><br /><div> <a href=" + datadictionary + row[0] +">View Full Metadata</a></div></div>"
-
+                    #Add check for special characters? 
+                    strDesc =  strDesc + r"<div><br /><div> <a href=" + datadictionary + r"/" + row[0] + r">View Full Metadata</a></div></div>"
                     strSummary = parser.Summary
                     strConstraints = parser.UseConst
 
@@ -86,15 +82,16 @@ def main(argv=None):
                         strConstraints = strConstraints + "<div><br /><div>" + parser.AccessConst + "</div></div>"
                     strTags = parser.Tags
                     strCredits = parser.Credits
-   
                     parser.close()
    
                     #Updata AGOL item
                     updateItemDescription(row[1], row[2], row[3],portalURL, token, strSummary, strDesc, strConstraints, strTags, strCredits )
                     logging.info("Updated from " + row[0])
-    except:
-        success = False
-        logging.info(arcpy.GetMessages(2))
+            except:
+                success = False
+                logging.info("Update failure " + row[0])
+                logging.info(arcpy.GetMessages(2))
+
 
     #Shutdown logging    
     logging.shutdown()    
@@ -171,6 +168,7 @@ class MyParser(HTMLParser):
             self.FoundSummary = 0
         elif self.FoundDesc:
             self.Desc = data
+           
             self.FoundDesc = 0
         elif self.FoundUseConst:
             self.UseConst = data
