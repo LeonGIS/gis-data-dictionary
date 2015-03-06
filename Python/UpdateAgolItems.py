@@ -35,16 +35,16 @@ def main(argv=None):
     datadictionary = arcpy.GetParameterAsText(5)
     
     # Set up logging
-    LOG_FILENAME = inputrepository + '/Metadata_UpdateAGOL.log'
+    LOG_FILENAME = '.\Metadata_UpdateAGOL.log'
     logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(levelname)-8s %(message)s',
                     datefmt='%a, %d %b %Y %H:%M:%S',
                     filename=LOG_FILENAME,
-                    filemode='a')
+                    filemode='w')
 
-    logging.info("")
+   
     logging.info("**************************")
-
+    logging.info("")
   
     TokenExpiration = 15
 
@@ -247,4 +247,4 @@ def assertJsonSuccess(data):
     
 # Script start
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1:]))
+    main(sys.argv[1:])
