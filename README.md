@@ -1,6 +1,11 @@
 # gis-data-dictionary
 
 
+##Credits
+Tools are an adaptation of presentation materials and code samples developed by City of Cambridge, MA.
+Sweeney, Sean and Sheketoff, Rachel (October 2014) *One Metadata To Rule Them All*. Retrieved from https://github.com/seansweeney/NEARC-2014
+
+
 #Files
 
 ##./Python
