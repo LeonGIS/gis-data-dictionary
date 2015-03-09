@@ -435,9 +435,13 @@
       <div class="itemInfoHidden">
         <h2 class="idHeading">Tags</h2>
         <xsl:choose>
-          <xsl:when test="(/metadata/dataIdInfo[1]/themeKeys/keyword[1] != '')">
+          <!--<xsl:when test="(/metadata/dataIdInfo[1]/themeKeys/keyword[1] != '')">-->
+          <xsl:when test="(/metadata/dataIdInfo[1]/searchKeys/keyword[1] != '')">
             <p id="AGOL_Tags">
-              <xsl:value-of select="/metadata/dataIdInfo[1]/themeKeys/keyword[1]" />
+              <xsl:call-template name="comma-join">
+                <xsl:with-param name="list" select="/metadata/dataIdInfo[1]/searchKeys/*">
+                </xsl:with-param>
+              </xsl:call-template>
             </p>
           </xsl:when>
           <xsl:otherwise>
@@ -474,6 +478,15 @@
     
     
   </xsl:template>
+
+  <!--Comma delimited string-->
+  <xsl:template name="comma-join">
+    <xsl:param name="list" />
+    <xsl:for-each select="$list">
+      <xsl:value-of select= "concat(., substring(',', 2 - (position() != last())))"/>
+    </xsl:for-each>
+  </xsl:template>
+
 
 
   <xsl:template name="removeHtmlTags">
@@ -982,7 +995,9 @@
       padding:0px 0px 10px 0px;
       }
 
-      #navigation li {list-style: none; }
+      #navigation li {
+      list-style: none; 
+      }
 
       ul.top-level li{
       margin-top:5px;
@@ -1011,9 +1026,21 @@
       }
 
 
-      ul.sub-level {display: none;}
+      ul.sub-level {
+        display: none;
+        
+      }
 
-      li:hover .sub-level {transition: all .5s ease-out 0s;    background: #999;    border: #fff solid;    border-width: 1px;    display: block;    position: absolute;    left: 75px;    top: 5px;	border-radius:5px;}
+      li:hover .sub-level {
+      transition: all .5s ease-out 0s;    
+      background: #999;    
+      border: #fff solid;    
+      border-width: 1px;    
+      display: block;    
+      position: absolute;    
+      left: 75px;    
+      top: 5px;	
+      border-radius:5px;}
 
       ul.sub-level li {
       border: none;
