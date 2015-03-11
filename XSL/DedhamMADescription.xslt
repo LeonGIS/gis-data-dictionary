@@ -244,7 +244,6 @@
       </div>
 
      <!--  Download Links-->
-    
         <div class="itemInfo">
           <h2 class="idHeading">Download Layer</h2>
           <xsl:variable name="downloadlinks" select="/metadata/distInfo/distributor/distorTran/onLineSrc[translate(linkage,$Lower,$Upper)!='' and translate(orDesc,$Lower,$Upper)!= '']" />
@@ -265,9 +264,6 @@
           </xsl:choose>
         </div>
      
-      
-    
-      
       <!--AGOL Summary/Metadata Purpose-->
       <div class="itemInfo">
         <h2 class="idHeading">Summary</h2>
@@ -288,17 +284,13 @@
       <!--AGOL Description/Metadata Abstract/Tool Summary-->
       <div class="itemInfo">
         <h2 class="idHeading">Description</h2>
-
-        <xsl:variable name="Desc">
-          <xsl:call-template name="removeHtmlTags">
-            <xsl:with-param name="html" select="/metadata/dataIdInfo[1]/idAbs" />
-          </xsl:call-template>
-        </xsl:variable>
         <xsl:choose>
           <xsl:when test="(/metadata/dataIdInfo[1]/idAbs != '')">
-            <p id="AGOL_Desc">
-              <xsl:value-of disable-output-escaping="yes"  select="substring($Desc, 0, 1000)"/>
-            </p>
+            <div id="AGOL_Desc">
+              <xsl:call-template name="p-element">
+                <xsl:with-param name="html" select="/metadata/dataIdInfo[1]/idAbs" />
+              </xsl:call-template>
+            </div>
           </xsl:when>
           <xsl:otherwise>
             <p>
@@ -411,17 +403,23 @@
       <!-- Legal constraints -->
       <div class="itemInfo">
         <h2 class="idHeading">Legal Constraints</h2>
-        <xsl:variable name="UseLimit">
+        <!--<xsl:variable name="UseLimit">
           <xsl:call-template name="removeHtmlTags">
             <xsl:with-param name="html" select="/metadata/dataIdInfo[1]/resConst/LegConsts/othConsts" />
           </xsl:call-template>
-        </xsl:variable>
+        </xsl:variable>-->
 
         <xsl:choose>
           <xsl:when test="(/metadata/dataIdInfo[1]/resConst/LegConsts/othConsts != '')">
-            <p id="AGOL_AccessConst">
+            <!--<p id="AGOL_AccessConst">
               <xsl:value-of disable-output-escaping="yes"  select="substring($UseLimit, 0, 1000)"/>
-            </p>
+            </p>-->
+
+            <div id="AGOL_AccessConst">
+              <xsl:call-template name="p-element">
+                <xsl:with-param name="html" select="/metadata/dataIdInfo[1]/resConst/LegConsts/othConsts" />
+              </xsl:call-template>
+            </div>
           </xsl:when>
           <xsl:otherwise>
             <p>
@@ -487,8 +485,88 @@
     </xsl:for-each>
   </xsl:template>
 
+<!-- Template Name: p-element -->
+<!-- Description: Used to preserve line-breaks in original metadata.
+                  Recurse through HTML text looking for <P> elements -->
+  <xsl:template name="p-element">
+    <xsl:param name="html"/>
+    
+    <xsl:choose>
+      <xsl:when test="contains($html, '&lt;P')">
+        <xsl:variable name="strRemain">
+        <!-- Strip HTML tags -->  
+        <xsl:call-template name="removeHtmlTags">
+          <xsl:with-param name="html" select="substring-before($html, 'P&gt;')" />
+        </xsl:call-template>
+        </xsl:variable>
+        
+        <!-- Add P Element-->
+        <xsl:if test="$strRemain != ''">
+          <!--<p>
+            <xsl:value-of select="$strRemain"/>
+          </p>-->
+          <xsl:call-template name="find-newlinechar">
+            <xsl:with-param name="strMetaText" select="$strRemain"/>
+          </xsl:call-template>
+          
+        </xsl:if>
+        
+        <!-- Recurse on remainder -->
+        <xsl:call-template name="p-element">
+          <xsl:with-param name="html" select="substring-after($html, 'P&gt;')"/>
+        </xsl:call-template>
+      </xsl:when>
+      
+      <!-- No P element in string -->
+      <xsl:otherwise>
+        <!-- Strip HTML tags -->
+        <xsl:variable name="strRemain">
+          <xsl:call-template name="removeHtmlTags">
+            <xsl:with-param name="html" select="$html" />
+          </xsl:call-template>
+        </xsl:variable>
+        <!-- Add P Element-->
+        <xsl:if test="$strRemain != ''">
+          <!--<p>
+            <xsl:value-of select="$strRemain"/>
+          </p>-->
+          <xsl:call-template name="find-newlinechar">
+            <xsl:with-param name="strMetaText" select="$strRemain"/>
+          </xsl:call-template>
+        </xsl:if>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
 
 
+
+  <xsl:template name="find-newlinechar">
+    <xsl:param name="strMetaText"/>
+  <xsl:choose>
+      <xsl:when test="contains($strMetaText, '&#10;')">
+        <xsl:if test="substring-before($strMetaText, '&#10;') != ''">
+          <p>
+            <xsl:value-of select="substring-before($strMetaText, '&#10;')" />
+          </p>
+        </xsl:if>
+        <xsl:call-template name="find-newlinechar">
+          <xsl:with-param name="strMetaText" select="substring-after($strMetaText, '&#10;')"/>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:if test="$strMetaText != ''">
+          <p>
+            <xsl:value-of select="$strMetaText" />
+          </p>
+        </xsl:if>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+    
+  
+  
+  
+<!-- Remove HTML tags from string -->
   <xsl:template name="removeHtmlTags">
     <xsl:param name="html"/>
     <xsl:choose>

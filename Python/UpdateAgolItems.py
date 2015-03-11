@@ -140,16 +140,29 @@ class MyParser(HTMLParser):
             for name, value in attrs:
                 if name == 'class' and value == 'idHeading':
                     self.FoundTitle = 1
+
+        if tag == 'div':
+            for name, value in attrs:
+                if name == 'id' and value == 'AGOL_Desc':
+                    self.FoundDesc = 1
+                    self.FoundAccessConst = 0
+                elif name == 'id' and value == 'AGOL_AccessConst':
+                    self.FoundAccessConst = 1
+                    self.FoundDesc = 0
+                else: 
+                    self.FoundDesc = 0
+                    self.FoundAccessConst = 0
+                
         if tag == 'p':
             for name, value in attrs:
                 if name == 'id' and value == 'AGOL_Summary':
                     self.FoundSummary = 1
                 elif name == 'id' and value == 'AGOL_Desc':
-                    self.FoundDesc = 1
+                   self.FoundDesc = 1
+                
                 elif name == 'id' and value == 'AGOL_UseConst':
                     self.FoundUseConst = 1
-                elif name == 'id' and value == 'AGOL_AccessConst':
-                    self.FoundAccessConst = 1
+
                 elif name == 'id' and value == 'AGOL_Tags':
                     self.FoundTags = 1
                 elif name == 'id' and value == 'AGOL_Credits':
@@ -167,15 +180,14 @@ class MyParser(HTMLParser):
             self.Summary = data
             self.FoundSummary = 0
         elif self.FoundDesc:
-            self.Desc = data
-           
-            self.FoundDesc = 0
+            self.Desc = self.Desc +"\n" + data
+         
         elif self.FoundUseConst:
             self.UseConst = data
             self.FoundUseConst = 0
         elif self.FoundAccessConst:
-            self.AccessConst = data
-            self.FoundAccessConst = 0
+            self.AccessConst = self.AccessConst +"\n" + data
+          
         elif self.FoundTags:
             self.Tags = data
             self.FoundTags = 0
