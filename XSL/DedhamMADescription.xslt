@@ -323,22 +323,32 @@
       <!-- Attribute Table-->
       <div class="itemInfo">
         <h2 class="idHeading">Attributes</h2>
-        <xsl:variable name="attributes" select="/metadata/eainfo/detailed/attr[translate(attrlabl,$Lower,$Upper)!='OBJECTID' and translate(attrlabl,$Lower,$Upper)!= 'OBJECTID_1' and translate(attrlabl,$Lower,$Upper)!= 'GLOBALID' and translate(attrlabl, $Lower, $Upper)!= 'SHAPE' and translate(attrlabl,$Lower,$Upper)!= 'SHAPE.AREA' and translate(attrlabl,$Lower,$Upper)!= 'SHAPE.LEN' and translate(attrlabl,$Lower,$Upper)!= 'SHAPE.STAREA()' and translate(attrlabl,$Lower,$Upper)!= 'SHAPE.STLENGTH()'  and translate(attrlabl,$Lower,$Upper)!= 'RULEID'  and translate(attrlabl,$Lower,$Upper)!= 'RULEID_1'  and translate(attrlabl,$Lower,$Upper)!= 'OVERRIDE'  and translate(attrlabl,$Lower,$Upper)!= '']" />
+        <xsl:variable name="attributes" select="/metadata/eainfo/detailed/attr[translate(attrlabl,$Lower,$Upper)!='OBJECTID' and translate(attrlabl,$Lower,$Upper)!= 'OBJECTID_1' and translate(attrlabl,$Lower,$Upper)!= 'GLOBALID' and translate(attrlabl, $Lower, $Upper)!= 'SHAPE' and translate(attrlabl,$Lower,$Upper)!= 'SHAPE.AREA' and translate(attrlabl,$Lower,$Upper)!= 'SHAPE.LEN' and translate(attrlabl,$Lower,$Upper)!= 'SHAPE.STAREA()' and translate(attrlabl,$Lower,$Upper)!= 'SHAPE.STLENGTH()'   and translate(attrlabl,$Lower,$Upper)!= 'SHAPE_AREA' and translate(attrlabl,$Lower,$Upper)!= 'SHAPE_LENGTH' and translate(attrlabl,$Lower,$Upper)!= 'RULEID'  and translate(attrlabl,$Lower,$Upper)!= 'RULEID_1'  and translate(attrlabl,$Lower,$Upper)!= 'OVERRIDE' and translate(attrlabl,$Lower,$Upper)!= 'OVERRIDE_1' and translate(attrlabl,$Lower,$Upper)!= ''  and translate(attrlabl,$Lower,$Upper)!= 'CREATED_USER' and translate(attrlabl,$Lower,$Upper)!= 'CREATED_DATE'  and translate(attrlabl,$Lower,$Upper)!= 'LAST_EDITED_USER' and translate(attrlabl,$Lower,$Upper)!= 'LAST_EDITED_DATE']" />
         <!--return any nodes that pass the select statement, not the actual translations-->
-        <xsl:if test="count($attributes) > 0">
-          <p>
-            <table>
-              <thead>
-                <tr>
-                  <th class="name">Name</th>
-                  <th class="type">Type Details</th>
-                  <th class="description">Description</th>
-                </tr>
-              </thead>
-              <xsl:apply-templates select="$attributes" />
-            </table>
-          </p>
-        </xsl:if>
+        <xsl:choose>
+          <xsl:when test="count($attributes) > 0">
+            <p>
+              <table>
+                <thead>
+                  <tr>
+                    <th class="name">Name</th>
+                    <th class="type">Type Details</th>
+                    <th class="description">Description</th>
+                  </tr>
+                </thead>
+                <xsl:apply-templates select="$attributes" />
+              </table>
+            </p>
+            
+          </xsl:when>
+          <xsl:otherwise>
+            <p>
+              <span class="noContent">
+                There is no attributes for this item.
+              </span>
+            </p>
+          </xsl:otherwise>
+        </xsl:choose>
       </div>
 
       <!-- Projection Information-->

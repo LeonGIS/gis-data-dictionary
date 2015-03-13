@@ -72,14 +72,14 @@ def main(argv=None):
                     strDesc =  parser.Desc
 
                     #Add check for special characters? 
-                    strDesc =  strDesc + r"<div><br /><div> <a href=" + datadictionary + r"/" + row[0] + r">View Full Metadata</a></div></div>"
+                    strDesc =  strDesc + r"<p> <a href=" + datadictionary + r"/" + row[0] + r">View Full Metadata</a></p>"
                     strSummary = parser.Summary
                     strConstraints = parser.UseConst
 
                     if strConstraints == '':
                         strConstraints = parser.AccessConst
                     elif parser.AccessConst != '':
-                        strConstraints = strConstraints + "<div><br /><div>" + parser.AccessConst + "</div></div>"
+                        strConstraints = strConstraints  + parser.AccessConst
                     strTags = parser.Tags
                     strCredits = parser.Credits
                     parser.close()
@@ -159,10 +159,8 @@ class MyParser(HTMLParser):
                     self.FoundSummary = 1
                 elif name == 'id' and value == 'AGOL_Desc':
                    self.FoundDesc = 1
-                
                 elif name == 'id' and value == 'AGOL_UseConst':
                     self.FoundUseConst = 1
-
                 elif name == 'id' and value == 'AGOL_Tags':
                     self.FoundTags = 1
                 elif name == 'id' and value == 'AGOL_Credits':
@@ -180,13 +178,15 @@ class MyParser(HTMLParser):
             self.Summary = data
             self.FoundSummary = 0
         elif self.FoundDesc:
-            self.Desc = self.Desc +"\n" + data
-         
+            if data.strip() != "":
+                self.Desc = self.Desc + r"<p>" + data.strip() + r"</p>"
+          
         elif self.FoundUseConst:
             self.UseConst = data
             self.FoundUseConst = 0
         elif self.FoundAccessConst:
-            self.AccessConst = self.AccessConst +"\n" + data
+            if data.strip() != "":
+                self.AccessConst = self.AccessConst + r"<p>" + data.strip() + r"</p>"
           
         elif self.FoundTags:
             self.Tags = data
