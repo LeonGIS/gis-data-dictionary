@@ -71,7 +71,7 @@ def main(argv=None):
                     parser.feed(open(inputrepository + '\\' + row[0]).read())
                     strDesc =  parser.Desc
 
-                    #Add check for special characters? 
+                    #To do: Add check for Unicode characters
                     strDesc =  strDesc + r"<p> <a href=" + datadictionary + r"/" + row[0] + r">View Full Metadata</a></p>"
                     strSummary = parser.Summary
                     strConstraints = parser.UseConst

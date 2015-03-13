@@ -152,7 +152,7 @@
                            <!-- Add Sub Category menu items-->
                           <ul class="sub-level">
                             <xsl:for-each select="$extracttable//DatasetData//Records/Record[Values/Value=$Category and Values/Value=$SubCategory]">
-                              <xsl:sort select="Values/Value[number($Extract_Fileindex)]" />
+                              <xsl:sort select="Values/Value[number($Extract_Itemindex)]" />
                               <li>
                                 <a>
                                   <xsl:attribute name="href">
@@ -175,7 +175,7 @@
                 <xsl:otherwise>
                   <ul class="sub-level">
                     <xsl:for-each select="$extracttable//DatasetData//Records/Record[Values/Value=$Category]">
-                      <xsl:sort select="Values/Value[number($Extract_Fileindex)]" />
+                      <xsl:sort select="Values/Value[number($Extract_Itemindex)]" />
                       <li>
                         <a>
                           <xsl:attribute name="href">
