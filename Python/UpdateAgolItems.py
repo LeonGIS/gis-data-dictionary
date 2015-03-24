@@ -23,6 +23,9 @@ import json
 from HTMLParser import HTMLParser
 
 
+
+
+
 # Defines the entry point into the script
 def main(argv=None):   
     
@@ -48,7 +51,7 @@ def main(argv=None):
   
     TokenExpiration = 15
 
-
+    
      # Get a token
     token = getAGOLToken(AGOLusername, AGOLpassword, TokenExpiration)
     if token == "":
@@ -92,7 +95,7 @@ def main(argv=None):
                 logging.info("Update failure " + row[0])
                 logging.info(arcpy.GetMessages(2))
 
-
+                
     #Shutdown logging    
     logging.shutdown()    
     
@@ -170,6 +173,13 @@ class MyParser(HTMLParser):
                 if name == 'src':
                     self.Thumbnail = value
 
+    def handle_endtag(self, tag):
+        if tag == 'p':
+            if self.FoundCredits:
+                    self.FoundCredits = 0
+
+       
+
     def handle_data(self, data):
         if self.FoundTitle:
             self.Title = data
@@ -192,8 +202,15 @@ class MyParser(HTMLParser):
             self.Tags = data
             self.FoundTags = 0
         elif self.FoundCredits:
-            self.Credits = data
-            self.FoundCredits = 0
+            self.Credits =  self.Credits + data.strip()
+            #self.FoundCredits = 0
+
+    def handle_entityref(self, name):
+        if name == 'amp':
+            if self.FoundCredits:
+                 self.Credits =  self.Credits + r" & "
+        
+    
 
     def clean(self):
         self.Title = ''

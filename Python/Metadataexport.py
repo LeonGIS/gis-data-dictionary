@@ -20,6 +20,7 @@ outworkspace = arcpy.GetParameterAsText(3)
 env.workspace = outworkspace
 
 
+
 # Set up logging
 LOG_FILENAME = '\Metadataexport.log'
 logging.basicConfig(level=logging.DEBUG,
