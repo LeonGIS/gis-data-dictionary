@@ -430,6 +430,7 @@
       margin-top: 0;
       margin-bottom: 5px;
       }
+      
       h1.idHeading {
       color: #000000;
       max-width: 300px;
@@ -873,6 +874,7 @@
       li:hover .sub-level .sub-level {
       display:none;
       }
+      
       .sub-level li:hover .sub-level {
       display:block;
       transition: all .5s ease-out 0s;
