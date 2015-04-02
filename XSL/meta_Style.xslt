@@ -13,21 +13,19 @@
 
   <xsl:template name="MetaStyles">
     <style type="text/css" id="internalStyle">
+      html {
+      min-height: 100%;
+      position: relative;
+      }
 
-
-html {
-min-height: 100%;
-position: relative;
-}
-
-body {
-font-family: Verdana, Gill, Helvetica, Sans-serif ;
-font-size: 0.8em;
-font-weight: 500;
-color: #000020;
-background-color: #FFFFFF;
-margin: 0px 0px 190px 0px;
-}
+      body {
+      font-family: Verdana, Gill, Helvetica, Sans-serif ;
+      font-size: 0.8em;
+      font-weight: 500;
+      color: #000020;
+      background-color: #FFFFFF;
+      margin: 0px 0px 190px 0px;
+      }
 
       <!--General Elemebts-->
       a:link {
@@ -55,37 +53,42 @@ margin: 0px 0px 190px 0px;
       overflow: hidden;
       overflow-wrap: normal;
       }
+
+      h2 {
+      font-size: 1.2em;
+      margin-left: 10px;
+      }
       
 
       <!--Header -->
-.header {
-background: #710000;
-color: #ffffff;
-height: 70px;
-}
+      .header {
+      background: #710000;
+      color: #ffffff;
+      height: 70px;
+      }
 
-.container {
-margin-left: 30px;
-height: 70px;
-}
+      .container {
+      margin-left: 30px;
+      height: 70px;
+      }
 
-.logoimage {
-width: 50px;
-height: 50px;
-margin-bottom: 10px;
-margin-top: 10px;
-float: left;
-padding: 0 20px 0 0;
-}
+      .logoimage {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 10px;
+      margin-top: 10px;
+      float: left;
+      padding: 0 20px 0 0;
+      }
 
-.site-logo {
-color: #FFFFFF !important;
-font-size: 30px;
-font-family: "Avenir LT W01 65 Medium",Arial,sans-serif;
-line-height: 70px;
-}
+      .site-logo {
+      color: #FFFFFF !important;
+      font-size: 30px;
+      font-family: "Avenir LT W01 65 Medium",Arial,sans-serif;
+      line-height: 70px;
+      }
 
-<!--Footer -->
+      <!--Footer -->
       .footer {
       height: 150px;
       background: #e9e9e9;
@@ -100,9 +103,13 @@ line-height: 70px;
       max-width: 1120px;
       }
 
-
-
       <!-- Navigation Menus -->
+      .nav {
+      position:absolute;
+      left: 0px;
+      z-index:99999;
+      }
+      
       #navigation {
       font-size:1em;
       width:200px;
@@ -210,7 +217,16 @@ line-height: 70px;
       }
 
 
-<!-- Main Content-->
+      <!-- Main Content-->
+      .main {
+      left: 220px;
+      position: relative;
+      width: 75%;
+      margin-left: 30px;
+      max-width: 900px;
+      margin-bottom: 150px;
+      }
+      
       div.itemDescription {
       margin-right: 2em;
       margin-bottom: 2em;
@@ -235,7 +251,7 @@ line-height: 70px;
       .Category h3 {
       font-size: 1.2em;
       font-style: italic;
-      }
+}
 
     </style>
   </xsl:template>

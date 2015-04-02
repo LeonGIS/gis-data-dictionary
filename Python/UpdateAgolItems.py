@@ -64,7 +64,7 @@ def main(argv=None):
     with arcpy.da.SearchCursor(ExtractTable, fields) as cursor:
         for row in cursor:
             try:
-                if not (row[0] is None) and not (row[1] is None) and not (row[2] is None) and not (row[3] is None):
+                if not (row[0] is None) and not (row[1] is None) and not (row[3] is None):
                     strSummary = ''
                     strDesc = ''
                     strConstraints = ''
@@ -88,7 +88,7 @@ def main(argv=None):
                     parser.close()
    
                     #Updata AGOL item
-                    updateItemDescription(row[1], row[2], row[3],portalURL, token, strSummary, strDesc, strConstraints, strTags, strCredits )
+                    updateItemDescription(portalURL, row[1],  row[3], row[2], token, strSummary, strDesc, strConstraints, strTags, strCredits )
                     logging.info("Updated from " + row[0])
             except:
                 success = False
@@ -99,7 +99,7 @@ def main(argv=None):
     #Shutdown logging    
     logging.shutdown()    
     
-def updateItemDescription(userID, folderID, itemID, portalURL, token=None,  snippet='', desc='',  constraints='', tags='', credits=''):
+def updateItemDescription(portalURL, userID, itemID, folderID=None,  token=None,  snippet='', desc='',  constraints='', tags='', credits=''):
     '''Update the item descriptive information.'''
     params = {
         'snippet': snippet,         # Summary
@@ -110,8 +110,11 @@ def updateItemDescription(userID, folderID, itemID, portalURL, token=None,  snip
         'token' : token,
         'f': 'json'
     }
-    requestURL = portalURL + '/sharing/rest/content/users/' + userID + '/' + \
-                 folderID + '/items/' + itemID + '/update'
+    if folderID == None:
+        requestURL = portalURL + '/sharing/rest/content/users/' + userID +  '/items/' + itemID + '/update'
+    else:
+        requestURL = portalURL + '/sharing/rest/content/users/' + userID + '/' + folderID + '/items/' + itemID + '/update'
+    
     print requestURL
     f = urllib.urlopen(requestURL, urllib.urlencode(params));
     results = f.read();
@@ -143,8 +146,7 @@ class MyParser(HTMLParser):
             for name, value in attrs:
                 if name == 'class' and value == 'idHeading':
                     self.FoundTitle = 1
-
-        if tag == 'div':
+        elif tag == 'div':
             for name, value in attrs:
                 if name == 'id' and value == 'AGOL_Desc':
                     self.FoundDesc = 1
@@ -154,9 +156,8 @@ class MyParser(HTMLParser):
                     self.FoundDesc = 0
                 else: 
                     self.FoundDesc = 0
-                    self.FoundAccessConst = 0
-                
-        if tag == 'p':
+                    self.FoundAccessConst = 0         
+        elif tag == 'p':
             for name, value in attrs:
                 if name == 'id' and value == 'AGOL_Summary':
                     self.FoundSummary = 1
@@ -168,43 +169,51 @@ class MyParser(HTMLParser):
                     self.FoundTags = 1
                 elif name == 'id' and value == 'AGOL_Credits':
                     self.FoundCredits = 1
-        if tag == 'img':
+        elif tag == 'img':
             for name, value in attrs:
                 if name == 'src':
                     self.Thumbnail = value
 
     def handle_endtag(self, tag):
-        if tag == 'p':
-            if self.FoundCredits:
-                    self.FoundCredits = 0
-
-       
+        if tag == 'h1':
+            if self.FoundTitle:
+                self.FoundTitle = 0
+        #elif tag == 'div':
+        #    if self.FoundDesc:
+        #        self.FoundDesc = 0
+        #    elif self.FoundAccessConst:
+        #        self.FoundAccessConst = 0
+        #    elif self.FoundUseConst:
+        #        self.FoundUseConst = 0
+        elif tag == 'p':
+            if self.FoundSummary:
+                self.FoundSummary = 0
+            elif self.FoundUseConst:
+                self.FoundUseConst = 0
+            elif self.FoundTags:
+                 self.FoundTags = 0
+            elif self.FoundCredits:
+                 self.FoundCredits = 0
 
     def handle_data(self, data):
         if self.FoundTitle:
             self.Title = data
-            self.FoundTitle = 0
         elif self.FoundSummary:
             self.Summary = data
-            self.FoundSummary = 0
         elif self.FoundDesc:
             if data.strip() != "":
-                self.Desc = self.Desc + r"<p>" + data.strip() + r"</p>"
-          
+                self.Desc = self.Desc + r"<p>" + data.strip() + r"</p>"   
         elif self.FoundUseConst:
             self.UseConst = data
-            self.FoundUseConst = 0
         elif self.FoundAccessConst:
             if data.strip() != "":
-                self.AccessConst = self.AccessConst + r"<p>" + data.strip() + r"</p>"
-          
+                self.AccessConst = self.AccessConst + r"<p>" + data.strip() + r"</p>"    
         elif self.FoundTags:
             self.Tags = data
-            self.FoundTags = 0
         elif self.FoundCredits:
             self.Credits =  self.Credits + data.strip()
-            #self.FoundCredits = 0
-
+         
+     #Add support for other sections
     def handle_entityref(self, name):
         if name == 'amp':
             if self.FoundCredits:
