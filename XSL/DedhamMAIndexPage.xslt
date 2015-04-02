@@ -200,7 +200,7 @@
      
   
     <!-- Title and Image -->
-    <div class="itemDescription" id="overview">
+    <div class="indexMain" id="overview">
       <h1 class="idHeading">
         GIS Data Listing
       </h1>

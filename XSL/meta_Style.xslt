@@ -227,12 +227,15 @@
       margin-bottom: 150px;
       }
       
-      div.itemDescription {
+    
+
+      <!-- Index Page content-->
+      div.indexMain {
       margin-right: 2em;
       margin-bottom: 2em;
       margin-top: 50px;
       }
-
+      
       <!-- Index Page table-->
       .Category li {
       list-style: none;
@@ -251,9 +254,87 @@
       .Category h3 {
       font-size: 1.2em;
       font-style: italic;
-}
+      }
 
-    </style>
+
+      <!-- Metadata page content -->
+      div.itemDescription {
+      margin-right: 2em;
+      margin-bottom: 2em;
+      }
+
+      <!--Title/Image section-->
+      div.itemTitle {
+      align-items: center;
+      display: flex;
+      }
+
+      <!--Thumbnail-->
+      .center {
+      text-align: center;
+      margin-top: 40px;
+      margin-bottom: 10px;
+      }
+      img.center {
+      display: block;
+      border-color: #666666;
+      }
+
+
+      <!-- Item Info  General-->
+      .itemInfo p {
+      margin-left: 20px;
+      }
+      
+      
+      <!--Attribute Table-->
+      table {
+      border: 1px solid #B7B7B7;
+      border-collapse: collapse;
+      border-spacing: 0;
+      margin:0px;padding:0px;
+      }
+
+      tr {
+      vertical-align: top;
+      }
+
+      tr:nth-child(even) {
+      background-color: #E9E9E9
+      }
+
+      tr:nth-child(odd) {
+      background-color: #ffffff;
+      }
+
+      th {
+      text-align: left;
+      background: #B7B7B7;
+      vertical-align: bottom;
+      font-size: 12px;
+      padding: 10px 10px 5px 10px;
+      }
+
+      th.description{
+      min-width: 300px;
+      }
+
+      td {
+      color: black;
+      vertical-align: top;
+      font-size: 12px;
+      padding: 5px 10px 10px 5px;
+      vertical-align:middle;
+      border:1px solid #B7B7B7;
+      border-width:0px 1px 1px 0px;
+      }
+      
+      <!-- Tags -->
+    .itemInfoHidden {
+    display:none;
+    }
+
+  </style>
   </xsl:template>
 
 

@@ -7,7 +7,7 @@
      Revision History: Created 3/19/2009 avienneau
 -->
 
-
+  <xsl:import href = "meta_Style.xslt" />
   <xsl:import href = "DedhamMADescription.xslt" />
 
   <xsl:output method="html" omit-xml-declaration="yes" />
@@ -26,8 +26,8 @@
 
       <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-        <xsl:call-template name="styles" />
-        <!--<xsl:call-template name="scripts" />-->
+        <!--<xsl:call-template name="styles" />-->
+        <xsl:call-template name="MetaStyles" />
       </head>
 
       <body oncontextmenu="return true">
