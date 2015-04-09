@@ -2,13 +2,13 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:msxsl="urn:schemas-microsoft-com:xslt" exclude-result-prefixes="msxsl"
 >
-    <xsl:output method="xml" indent="yes"/>
+  <xsl:output method="xml" indent="yes"/>
 
-    <xsl:template match="@* | node()">
-        <xsl:copy>
-            <xsl:apply-templates select="@* | node()"/>
-        </xsl:copy>
-    </xsl:template>
+  <xsl:template match="@* | node()">
+    <xsl:copy>
+      <xsl:apply-templates select="@* | node()"/>
+    </xsl:copy>
+  </xsl:template>
 
 
   <xsl:template name="MetaStyles">
@@ -55,16 +55,8 @@
       }
 
       h1.idAppTitle {
-      <!--display: inline-block;
-      background: none;
-      max-height: 75px;-->
       font-size: 44px;
-      <!--line-height: 75px;
-      height: 75px;
-      padding: 0;
-      margin: 0;
-      overflow: hidden;-->
-    text-shadow: 1px 1px 1px #E9E9E9;
+      text-shadow: 1px 1px 1px #E9E9E9;
       font-family: Arial, Helvetica, sans-serif;
       font-weight: bold;
       color: #000;
@@ -77,32 +69,31 @@
       }
 
       .container {
-      <!--margin-left: 30px;-->
       margin-left: auto;
       margin-right:auto;
       width: 980px;
-     
       }
 
- <!--Layout-->
-.leftPanel{
-width:200px;
-position: relative;
-float:left;
-height: auto !important;
-}
+      <!--Layout-->
+      .leftPanel{
+      width:200px;
+      position: relative;
+      float:left;
+      height: auto !important;
+      }
       .mainPanel {
       width: 750px;
       position: relative;
       float: left;
-     padding: 0 0 0 30px;
+      padding: 0 0 0 30px;
       }
-      
+
       #content{
-       background: #e5e5e5
+      background: #e5e5e5;
+      padding: 0px 10px 0px 10px;
       }
-      
-      
+
+
       <!--Header -->
       #header {
       height: 75px;
@@ -110,31 +101,14 @@ height: auto !important;
       color: #000;
       position: relative;
       background: #710000;
-     
       }
-      <!--.header {
-      background: #710000;
-      color: #ffffff;
-      --><!--height: 70px;--><!--
-      }-->
+
 
       .headerContainer {
-      <!--margin-left: 30px;-->
-      <!--margin-left: auto;
-      margin-right:auto;
-      width: 900px;-->
       height: 75px;
-      background: url(./images/banner.png)
+      background: url(./images/banner.png);
+      padding: 0px 10px 0px 10px;
       }
-
-      <!--.logoimage {
-      width: 50px;
-      height: 50px;
-      margin-bottom: 10px;
-      margin-top: 10px;
-      float: left;
-      padding: 0 20px 0 0;
-      }-->
 
       #templateNav {
       list-style: none;
@@ -165,22 +139,7 @@ height: auto !important;
       padding: 0;
       background: none;
       }
-      
-      <!--.site-logo {
-      display: inline-block;
-      background: none;
-      max-height: 75px;
-      font-size: 35px;
-      line-height: 75px;
-      height: 75px;
-      padding: 0;
-      margin: 0;
-      overflow: hidden;
-      text-shadow: 1px 1px 1px #000;
-      font-family: Arial, Helvetica, sans-serif;
-      font-weight: bold;
-      color: #fff;
-      }-->
+
 
       <!--Footer -->
       #footer{
@@ -190,19 +149,9 @@ height: auto !important;
       height: 145px;
       background: #4d4d4d;
       }
-      <!--.footer {
-      height: 150px;
-      background: #e9e9e9;
-      position: absolute;
-      bottom: 0px;
-      width:100%
-      }-->
 
       .footerrow{
       padding: 20px 0px 0px 0px;
-      <!--text-align: right;-->
-      <!--width: 1120px;-->
-      <!--max-width: 1120px;-->
       }
 
       .footcontainer{
@@ -212,7 +161,6 @@ height: auto !important;
       }
 
       .foot_rightdiv{
-      <!--width: 460px;-->
       float: right;
       margin-left: 10px;
       margin-right: 10px;
@@ -241,12 +189,8 @@ height: auto !important;
       }
 
       .foot_leftdiv{
-
       width: 200px;
       float: left;
-      <!--margin-left: 10px;
-      margin-right: 10px;
-      display: inline;-->
       }
 
       #footer .logoDiv{
@@ -257,9 +201,8 @@ height: auto !important;
       #footer .footBorder {
       zoom: 1;
       background: url(./images/logoBorder.jpg) repeat-y top right;
-
-
       }
+      
       #yourLogo {
       display: inline-block;
       zoom: 1;
@@ -268,9 +211,7 @@ height: auto !important;
       outline: 0;
       width: 60px;
       height: 60px;
-
       border-radius: 5px;
-
       opacity: 1;
       }
 
@@ -286,23 +227,13 @@ height: auto !important;
       border-radius: 5px;
       }
 
-
-
       <!-- Navigation Menus -->
-      .nav {
-      <!--position:absolute;
-      left: 0px;-->
-      <!--z-index:99999;-->
-      }
-      
       #navigation {
       font-size:1em;
       width:200px;
       border-style: solid;
       background: #E9E9E9;
       margin-top: 120px;
-      <!--margin-left: 20px;
-      margin-right: 20px;-->
       border-color: #710000;
       border-width: 2px;
       }
@@ -412,16 +343,11 @@ height: auto !important;
       max-width: 900px;
       margin-bottom: 150px;
       }
-      
-    
+
+
 
       <!-- Index Page content-->
-      div.indexMain {
-      <!--margin-right: 2em;
-      margin-bottom: 2em;
-      margin-top: 50px;-->
-      }
-      
+
       <!-- Index Page table-->
       .Category li {
       list-style: none;
@@ -456,19 +382,18 @@ height: auto !important;
       }
 
       div.meta_title_left{
-width: 350px;
-float: left;
+      width: 350px;
+      float: left;
       }
       div.meta_title_rightt{
-margin-left: 10px;
-margin-bottom:10px;
+      margin-left: 10px;
+      margin-bottom:10px;
       }
-      
+
       <!--Thumbnail-->
       .center {
       text-align: center;
-      <!--margin-top: 40px;-->
-      <!--margin-bottom: 10px;-->
+
       }
       img.center {
       display: block;
@@ -479,7 +404,7 @@ margin-bottom:10px;
       .itemInfo p {
       margin-left: 20px;
       }
-      
+
       <!--Attribute Table-->
       table {
       border: 1px solid #B7B7B7;
@@ -521,16 +446,16 @@ margin-bottom:10px;
       border:1px solid #B7B7B7;
       border-width:0px 1px 1px 0px;
       }
-      
-      <!-- Tags -->
-    .itemInfoHidden {
-    display:none;
-    }
 
-  </style>
+      <!-- Tags -->
+      .itemInfoHidden {
+      display:none;
+      }
+
+    </style>
   </xsl:template>
 
 
 </xsl:stylesheet>
-  
-  
+
+

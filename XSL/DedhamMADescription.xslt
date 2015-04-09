@@ -579,9 +579,6 @@
     </xsl:choose>
   </xsl:template>
 
-
-
-
   <!-- Remove HTML tags from string -->
   <xsl:template name="removeHtmlTags">
     <xsl:param name="html"/>
