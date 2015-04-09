@@ -27,7 +27,7 @@
       margin: 0px 0px 190px 0px;
       }
 
-      <!--General Elemebts-->
+      <!--General Elements-->
       a:link {
       color: #098EA6;
       font-weight: normal;
@@ -40,7 +40,7 @@
       }
 
       h1 {
-      font-size: 24px;
+      font-size: 22px;
       margin-top: 0;
       margin-bottom: 5px;
       }
@@ -54,60 +54,245 @@
       overflow-wrap: normal;
       }
 
-      h2 {
-      font-size: 1.2em;
-      margin-left: 10px;
+      h1.idAppTitle {
+      <!--display: inline-block;
+      background: none;
+      max-height: 75px;-->
+      font-size: 44px;
+      <!--line-height: 75px;
+      height: 75px;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;-->
+    text-shadow: 1px 1px 1px #E9E9E9;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      color: #000;
+      padding: 30px 0px 30px 0px;
       }
-      
 
-      <!--Header -->
-      .header {
-      background: #710000;
-      color: #ffffff;
-      height: 70px;
+      h2 {
+      font-size: 16px;
+      margin-left: 10px;
       }
 
       .container {
-      margin-left: 30px;
-      height: 70px;
+      <!--margin-left: 30px;-->
+      margin-left: auto;
+      margin-right:auto;
+      width: 980px;
+     
       }
 
-      .logoimage {
+ <!--Layout-->
+.leftPanel{
+width:200px;
+position: relative;
+float:left;
+height: auto !important;
+}
+      .mainPanel {
+      width: 750px;
+      position: relative;
+      float: left;
+     padding: 0 0 0 30px;
+      }
+      
+      #content{
+       background: #e5e5e5
+      }
+      
+      
+      <!--Header -->
+      #header {
+      height: 75px;
+      overflow: hidden;
+      color: #000;
+      position: relative;
+      background: #710000;
+     
+      }
+      <!--.header {
+      background: #710000;
+      color: #ffffff;
+      --><!--height: 70px;--><!--
+      }-->
+
+      .headerContainer {
+      <!--margin-left: 30px;-->
+      <!--margin-left: auto;
+      margin-right:auto;
+      width: 900px;-->
+      height: 75px;
+      background: url(./images/banner.png)
+      }
+
+      <!--.logoimage {
       width: 50px;
       height: 50px;
       margin-bottom: 10px;
       margin-top: 10px;
       float: left;
       padding: 0 20px 0 0;
+      }-->
+
+      #templateNav {
+      list-style: none;
+      margin: 0;
+      padding: 0;
       }
 
-      .site-logo {
-      color: #FFFFFF !important;
-      font-size: 30px;
-      font-family: "Avenir LT W01 65 Medium",Arial,sans-serif;
-      line-height: 70px;
+      #header ul #homeItem a {
+      display: inline-block;
+      background: none;
+      max-height: 75px;
+      font-size: 35px;
+      line-height: 75px;
+      height: 75px;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      text-shadow: 1px 1px 1px #000;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      color: #fff;
       }
+
+      #header ul li {
+      display: block;
+      float: left;
+      margin: 0;
+      padding: 0;
+      background: none;
+      }
+      
+      <!--.site-logo {
+      display: inline-block;
+      background: none;
+      max-height: 75px;
+      font-size: 35px;
+      line-height: 75px;
+      height: 75px;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      text-shadow: 1px 1px 1px #000;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      color: #fff;
+      }-->
 
       <!--Footer -->
-      .footer {
+      #footer{
+      position: relative;
+      width:100%;
+      float:right;
+      height: 145px;
+      background: #4d4d4d;
+      }
+      <!--.footer {
       height: 150px;
       background: #e9e9e9;
       position: absolute;
       bottom: 0px;
       width:100%
-      }
+      }-->
 
       .footerrow{
-      padding: 15px 0px 0px 0px;
-      text-align: right;
-      max-width: 1120px;
+      padding: 20px 0px 0px 0px;
+      <!--text-align: right;-->
+      <!--width: 1120px;-->
+      <!--max-width: 1120px;-->
       }
+
+      .footcontainer{
+      margin-left: auto;
+      margin-right: auto;
+      width: 960px;
+      }
+
+      .foot_rightdiv{
+      <!--width: 460px;-->
+      float: right;
+      margin-left: 10px;
+      margin-right: 10px;
+      }
+
+      #footer h2 {
+      font-size: 24px;
+      text-shadow: 1px 1px 1px #333;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      line-height: 30px;
+      color: #dddddd;
+      margin: 0 0 5px 0;
+      }
+
+      #footerDescription{
+      color: fff;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      line-height: 18px;
+      text-align: left;
+      }
+
+      #footer .Pad {
+      padding: 20px 0;
+      }
+
+      .foot_leftdiv{
+
+      width: 200px;
+      float: left;
+      <!--margin-left: 10px;
+      margin-right: 10px;
+      display: inline;-->
+      }
+
+      #footer .logoDiv{
+      padding: 20px;
+      text-align: center;
+      }
+
+      #footer .footBorder {
+      zoom: 1;
+      background: url(./images/logoBorder.jpg) repeat-y top right;
+
+
+      }
+      #yourLogo {
+      display: inline-block;
+      zoom: 1;
+      border: 0;
+      margin-bottom: 5px;
+      outline: 0;
+      width: 60px;
+      height: 60px;
+
+      border-radius: 5px;
+
+      opacity: 1;
+      }
+
+      #yourLogo img {
+      border: 0;
+      margin: 0;
+      outline: 0;
+      display: inline-block;
+      zoom: 1;
+      width: 60px;
+      height: 60px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+      }
+
+
 
       <!-- Navigation Menus -->
       .nav {
-      position:absolute;
-      left: 0px;
-      z-index:99999;
+      <!--position:absolute;
+      left: 0px;-->
+      <!--z-index:99999;-->
       }
       
       #navigation {
@@ -115,9 +300,9 @@
       width:200px;
       border-style: solid;
       background: #E9E9E9;
-      margin-top: 60px;
-      margin-left: 20px;
-      margin-right: 20px;
+      margin-top: 120px;
+      <!--margin-left: 20px;
+      margin-right: 20px;-->
       border-color: #710000;
       border-width: 2px;
       }
@@ -196,6 +381,7 @@
       width: 100%;
       top: 0px;
       left: 125px;
+      z-index:99999;
       }
 
       #navigation .sub-level .sub-level {
@@ -231,9 +417,9 @@
 
       <!-- Index Page content-->
       div.indexMain {
-      margin-right: 2em;
+      <!--margin-right: 2em;
       margin-bottom: 2em;
-      margin-top: 50px;
+      margin-top: 50px;-->
       }
       
       <!-- Index Page table-->
@@ -269,23 +455,30 @@
       display: flex;
       }
 
+      div.meta_title_left{
+width: 350px;
+float: left;
+      }
+      div.meta_title_rightt{
+margin-left: 10px;
+margin-bottom:10px;
+      }
+      
       <!--Thumbnail-->
       .center {
       text-align: center;
-      margin-top: 40px;
-      margin-bottom: 10px;
+      <!--margin-top: 40px;-->
+      <!--margin-bottom: 10px;-->
       }
       img.center {
       display: block;
       border-color: #666666;
       }
 
-
       <!-- Item Info  General-->
       .itemInfo p {
       margin-left: 20px;
       }
-      
       
       <!--Attribute Table-->
       table {

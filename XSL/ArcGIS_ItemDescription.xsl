@@ -26,7 +26,6 @@
 
       <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-        <!--<xsl:call-template name="styles" />-->
         <xsl:call-template name="MetaStyles" />
       </head>
 
@@ -34,13 +33,9 @@
         <xsl:if test="$flowdirection = 'RTL'">
           <xsl:attribute name="style">direction:rtl;</xsl:attribute>
         </xsl:if>
-
-
         <xsl:call-template name="iteminfo"/>
       </body>
     </html>
-
   </xsl:template>
-
 </xsl:stylesheet>
 
